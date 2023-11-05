@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "tour123456",
+    "image": "/assets/Rectangle66.png",
+    "placeName": "Historic City Tour",
+    "description": "Explore the rich history of our city on this guided tour on this invigorating hike.",
+    "providerImage": "/assets/Rectangle22.png",
+    "providerName": "John Doe Tours",
+    "tourArea": "Downtown",
+    "price": "50"
+  },
+  {
+    "_id": "tour234567",
+    "image": "/assets/Rectangle67.png",
+    "placeName": "Nature Hike",
+    "description": "Immerse yourself in the beauty of the natural world on this invigorating hike.",
+    "providerImage": "/assets/Rectangle22.png",
+    "providerName": "Jane's Adventures",
+    "tourArea": "Mountain Trails",
+    "price": "70"
+  },
+  {
+    "_id": "tour345678",
+    "image": "/assets/Rectangle68.png",
+    "placeName": "Culinary Delights",
+    "description": "Savor the flavors of our city's unique culinary scene on this food tour.",
+    "providerImage": "/assets/Rectangle22.png",
+    "providerName": "Tasty Travels",
+    "tourArea": "Gourmet District",
+    "price": "60"
+  },
+  {
+    "_id": "tour456789",
+    "image": "/assets/Rectangle68.png",
+    "placeName": "Sunset Cruise",
+    "description": "Experience a breathtaking sunset from the comfort of our cruise boat.",
+    "providerImage": "/assets/Rectangle22.png",
+    "providerName": "Sunset Sailors",
+    "tourArea": "Coastal Waters",
+    "price": "80"
+  }
+]

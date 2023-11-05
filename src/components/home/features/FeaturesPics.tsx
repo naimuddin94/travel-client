@@ -9,7 +9,7 @@ const FeaturesPics = () => {
         <img
           src="assets/Rectangle2.png"
           alt=""
-          className="w-52 absolute -bottom-16 left-20 md:left-40 pr-5"
+          className="w-52 absolute -bottom-16 left-20 md:left-40 pr-5 drop-shadow"
         />
       </div>
     </div>

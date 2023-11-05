@@ -33,17 +33,17 @@ const Helping = () => {
               <h6 className="text-[#FF5722] font-semibold text-lg">500+</h6>
               <p className="text-xs">Holiday Package</p>
             </div>
-            <div className="p-3 rounded-md w-fit bg-white shadow text-center">
-              <h6 className="text-[#FF5722] font-semibold text-lg">500+</h6>
-              <p className="text-xs">Holiday Package</p>
+            <div className="py-3 px-6 rounded-md w-fit bg-white shadow text-center">
+              <h6 className="text-[#FF5722] font-semibold text-lg">60</h6>
+              <p className="text-xs">Luxury Hotel</p>
             </div>
             <div className="p-3 rounded-md bg-white w-fit shadow text-center">
-              <h6 className="text-[#FF5722] font-semibold text-lg">500+</h6>
-              <p className="text-xs">Holiday Package</p>
+              <h6 className="text-[#FF5722] font-semibold text-lg">7</h6>
+              <p className="text-xs">Premium Airlines</p>
             </div>
             <div className="p-3 rounded-md bg-white w-fit shadow text-center">
-              <h6 className="text-[#FF5722] font-semibold text-lg">500+</h6>
-              <p className="text-xs">Holiday Package</p>
+              <h6 className="text-[#FF5722] font-semibold text-lg">2k+</h6>
+              <p className="text-xs">Happy Customer</p>
             </div>
           </div>
         </div>
