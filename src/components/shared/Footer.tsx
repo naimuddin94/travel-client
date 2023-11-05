@@ -1,14 +1,29 @@
+import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
+
 const Footer = () => {
   return (
-    <footer className="bg-[#071A52] text-[#A7FF83]">
-      <div className="footer p-10 justify-center sm:justify-around">
-        <aside>
-          <img src="/assets/logo.png" alt="" className="w-16" />
+    <footer className="common-padding">
+      <div className="footer py-10 justify-center sm:justify-between">
+        <aside className="max-w-xs space-y-3">
+          <div className="flex items-center gap-2">
+            <img src="/assets/logo.png" alt="" className="w-8" />
+            <h2 className="font-bold">Travlog</h2>
+          </div>
           <p>
-            BigMarket
-            <br />
-            Providing reliable valuable service since 2001
+            Contrary to popular belief, Lorem Ipsum is not simply random text.
+            It has roots in a piece of classical Latin literature from 45 BC.
           </p>
+          <div className="flex gap-3 text-white">
+            <div className="p-2 rounded-full bg-[#5D50C6] cursor-pointer hover:brightness-75">
+              <FaFacebookF />
+            </div>
+            <div className="p-2 rounded-full bg-[#5D50C6] cursor-pointer hover:brightness-75">
+              <FaTwitter />
+            </div>
+            <div className="p-2 rounded-full bg-[#5D50C6] cursor-pointer hover:brightness-75">
+              <FaInstagram />
+            </div>
+          </div>
         </aside>
         <nav>
           <header className="footer-title">Services</header>
@@ -31,9 +46,9 @@ const Footer = () => {
           <a className="link link-hover">Cookie policy</a>
         </nav>
       </div>
-      <div className="footer footer-center p-4 opacity-70">
+      <div className="footer footer-center p-4 opacity-80">
         <aside>
-          <p>Copyright © 2023 - All right reserved by BigMarket</p>
+          <p>Copyright © 2023 - All right reserved by Travlog</p>
         </aside>
       </div>
     </footer>

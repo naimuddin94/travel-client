@@ -1,9 +1,13 @@
+import Banner from "../components/home/Banner";
+import Partners from "../components/home/Partners";
+import Why from "../components/home/Why";
+
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-9xl font-black text-center py-20">
-        Home page display here
-      </h1>
+    <div className="">
+      <Banner />
+      <Partners />
+      <Why />
     </div>
   );
 };

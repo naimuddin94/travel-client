@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import NavItems from "../utility/NavItems";
-import Button from "../utility/Button";
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-[#071A52] h-12 text-[#A7FF83]">
+    <div className="navbar h-12 common-padding">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -35,7 +34,7 @@ const Navbar = () => {
             <div>
               <img src="/assets/logo.png" alt="Logo image" className="w-8" />
             </div>
-            <h2 className="font-bold">BigMarket</h2>
+            <h2 className="font-bold">Travlog</h2>
           </div>
         </Link>
       </div>
@@ -45,7 +44,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Button>Logout</Button>
+        <button className="custom-btn">Sign Up</button>
       </div>
     </div>
   );

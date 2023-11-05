@@ -1,4 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .custom-btn {
+    @apply py-2 sm:py-3 px-5 w-fit inline-flex justify-center items-center gap-2 rounded-full border border-transparent font-semibold bg-[#5D50C6] text-white hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm shadow shadow-[#5D50C6];
+  }
+
+  .custom-btn-two {
+    @apply py-2 sm:py-3 px-5 w-fit text-[#5D50C6] inline-flex justify-center items-center gap-2 rounded-full border border-slate-600 font-semibold hover:bg-[#5D50C6] hover:text-white hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm  shadow shadow-[#5D50C6];
+  }
+
+  .theme-text {
+    @apply text-[#F85E9F];
+  }
+
+  .common-padding {
+    @apply px-5 md:px-16;
+  }
+}

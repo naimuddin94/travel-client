@@ -10,8 +10,8 @@ const CustomLink = ({ goto, text }: ICustomLiProps) => {
     <NavLink
       className={({ isActive }) =>
         isActive
-          ? "bg-[#17B978] py-2 px-4 rounded-md text-slate-50"
-          : "py-2 px-4 rounded-md hover:bg-[#086972] hover:text-[#A7FF83]"
+          ? "bg-[#5D50C6] py-2 px-4 rounded-full text-slate-50"
+          : "py-2 px-4 rounded-full hover:bg-[#bab7d2]"
       }
       to={goto}
     >
