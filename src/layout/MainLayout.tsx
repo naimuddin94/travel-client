@@ -1,8 +1,19 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
+import { useEffect } from "react";
 
 const MainLayout = () => {
+  const { pathname } = useLocation();
+  const url = pathname.replace("/", "");
+  let title: string;
+
+  url ? (title = url) : (title = "home");
+
+  useEffect(() => {
+    document.title = `Travlog | ${title}`;
+  }, [title]);
+
   return (
     <div className="font-inter overflow-hidden relative max-w-[1440px] mx-auto">
       <div className="bg-[#ff562237] h-96 w-96 absolute rounded-full -left-40 -top-40 opacity-5 blur-xl -z-50"></div>

@@ -1,9 +1,34 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavItems from "../utility/NavItems";
 
 const Navbar = () => {
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 30) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="navbar h-12 common-padding">
+    <div
+      className={`navbar h-12 common-padding fixed z-50 ${
+        scrolling
+          ? "bg-gradient-to-r from-[#f85e9e79] to-[#5e50c67b] backdrop-blur"
+          : "bg-transparent"
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
