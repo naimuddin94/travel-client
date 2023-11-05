@@ -32,7 +32,7 @@ const Banner = () => {
         <div className="flex flex-col gap-6">
           <div className="relative">
             <img src="/assets/Rectangle1.png" alt="" className="" />
-            <div className="bg-[#F85E9F] p-3 rounded-full w-fit text-white absolute -bottom-6 -left-8 shadow-md shadow-[#ba376e]">
+            <div className="bg-[#F85E9F] p-3 rounded-full w-fit text-white absolute -bottom-5 -left-6 shadow-md shadow-[#ba376e]">
               <FaTelegramPlane className="text-4xl" />
             </div>
           </div>
