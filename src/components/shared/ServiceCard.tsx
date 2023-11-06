@@ -46,7 +46,7 @@ const ServiceCard = ({ service }: IServiceProps) => {
 
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-gray-600">${price}</span>
-          <button className="custom-btn bg-gradient-to-r from-[#F85E9F] to-[#5D50C6]">
+          <button className="custom-btn gradient">
             Details
           </button>
         </div>
