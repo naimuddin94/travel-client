@@ -5,10 +5,11 @@ import Home from "../pages/Home";
 import Services from "../pages/Services";
 import Signup from "../pages/Signup";
 import Signin from "../pages/Signin";
-import Dashboard from "../pages/Dashboard";
 import MyServices from "../pages/MyServices";
 import AddService from "../pages/AddService";
 import MySchedules from "../pages/MySchedules";
+import PrivateRoute from "./PrivateRoute";
+import ServiceDetails from "../pages/ServiceDetails";
 
 const router: Router = createBrowserRouter([
   {
@@ -24,10 +25,6 @@ const router: Router = createBrowserRouter([
         element: <Services />,
       },
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
         path: "/signup",
         element: <Signup />,
       },
@@ -37,15 +34,35 @@ const router: Router = createBrowserRouter([
       },
       {
         path: "/my-services",
-        element: <MyServices />,
+        element: (
+          <PrivateRoute>
+            <MyServices />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-service",
-        element: <AddService />,
+        element: (
+          <PrivateRoute>
+            <AddService />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-schedules",
-        element: <MySchedules />,
+        element: (
+          <PrivateRoute>
+            <MySchedules />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/services/:id",
+        element: (
+          <PrivateRoute>
+            <ServiceDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },

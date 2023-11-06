@@ -1,14 +1,11 @@
-import { IService } from "../home/PopularServices/PopularServices";
-
-interface IServiceProps {
-  service: IService;
-}
+import { Link } from "react-router-dom";
+import { IServiceProps } from "../../types/Types";
 
 const ServiceCard = ({ service }: IServiceProps) => {
   const {
     _id,
     image,
-    placeName,
+    serviceName,
     description,
     providerImage,
     providerName,
@@ -26,7 +23,7 @@ const ServiceCard = ({ service }: IServiceProps) => {
       <div className="p-5">
         <div>
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-            {placeName}
+            {serviceName}
           </h5>
         </div>
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
@@ -46,9 +43,9 @@ const ServiceCard = ({ service }: IServiceProps) => {
 
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-gray-600">${price}</span>
-          <button className="custom-btn gradient">
-            Details
-          </button>
+          <Link to={`/services/${_id}`}>
+            <button className="custom-btn gradient">Details</button>
+          </Link>
         </div>
       </div>
     </div>

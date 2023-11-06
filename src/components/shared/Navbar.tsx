@@ -72,7 +72,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="justify-end">
-        <h2 className="hidden sm:inline text-slate-300 font-mono mr-3">
+        <h2 className="hidden sm:inline text-slate-600 font-mono mx-3">
           {name && name}
         </h2>
         {photo && (

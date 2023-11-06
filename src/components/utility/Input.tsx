@@ -13,12 +13,12 @@ const Input = ({
 }: IInputProps) => {
   return (
     <div>
-      <label className="mb-2 text-sm font-medium text-white">{children}</label>
+      <label className="mb-2 text-sm font-medium">{children}</label>
       <input
         type={type}
         name={name}
         placeholder={placeholder}
-        className="border border-gray-500 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 placeholder-gray-400 text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="border border-gray-500 sm:text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-primary-600 block w-full p-2.5 bg-pink-50 placeholder-gray-400"
         required
       />
     </div>
