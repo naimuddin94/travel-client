@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavItems from "../utility/NavItems";
+import useAuthInfo from "../../hooks/useAuthInfo";
 
 const Navbar = () => {
+  const { name, photo } = useAuthInfo();
+  const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(photo);
   const [scrolling, setScrolling] = useState(false);
 
   useEffect(() => {
@@ -29,7 +32,7 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="navbar-start">
+      <div className="navbar-start flex-1">
         <div className="dropdown">
           <label tabIndex={0} className="btn btn-ghost lg:hidden">
             <svg
@@ -68,8 +71,23 @@ const Navbar = () => {
           <NavItems />
         </ul>
       </div>
-      <div className="navbar-end">
-        <button className="custom-btn">Sign Up</button>
+      <div className="justify-end">
+        <h2 className="hidden sm:inline text-slate-300 font-mono mr-3">
+          {name && name}
+        </h2>
+        {photo && (
+          <label className="btn btn-ghost btn-circle avatar">
+            <div className="w-10 rounded-full">
+              <img
+                src={
+                  urlRegex
+                    ? photo
+                    : "https://i.postimg.cc/m2HKMNv9/istockphoto-1451587807-612x612.jpg"
+                }
+              />
+            </div>
+          </label>
+        )}
       </div>
     </div>
   );

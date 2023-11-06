@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { updateProfile } from "firebase/auth";
+import { UserCredential, updateProfile } from "firebase/auth";
 import { toast } from "react-toastify";
 import { FormEvent, useState } from "react";
 import useAuthInfo from "../hooks/useAuthInfo";
@@ -10,10 +10,10 @@ import SocialLoginBtn from "../components/utility/SocialLoginBtn";
 
 const Signup = () => {
   const [error, setError] = useState<string | null>(null);
-  const { createUser, loading, setLoading } = useAuthInfo();
+  const { createUser, loading, setLoading, setName, setPhoto } = useAuthInfo();
   const navigate = useNavigate();
 
-  const handleRegister = (event: FormEvent) => {
+  const handleRegister = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const name = event.target.name.value;
     const email = event.target.email.value;
@@ -41,12 +41,14 @@ const Signup = () => {
     }
 
     createUser(email, password)
-      .then((result) => {
+      .then((result: UserCredential) => {
         event.target.reset();
         navigate("/");
         setError(null);
         toast.success("Account created successfully");
         // update profile
+        setName(name);
+        setPhoto(photo);
         updateProfile(result.user, {
           displayName: name,
           photoURL: photo,
@@ -71,7 +73,7 @@ const Signup = () => {
         >
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-2xl text-center font-bold leading-tight tracking-tight md:text-4xl text-white">
-              Register
+              Sign Up
             </h1>
             {error && <ErrorAlert>{error}</ErrorAlert>}
             <form onSubmit={handleRegister} className="space-y-4 md:space-y-6">

@@ -3,17 +3,27 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
   User,
+  UserCredential,
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 
 // typeset
 export interface AuthContextProps {
   user: User | null;
+  loading: boolean;
+  createUser: (email: string, password: string) => Promise<UserCredential>;
+  loginUser: (email: string, password: string) => Promise<UserCredential>;
+  signInWithGoogle: () => Promise<UserCredential>;
+  logOut: () => void;
+  setLoading: (loading: boolean) => void;
+  name: string | undefined | null;
+  setName: (name: string | undefined | null) => void;
+  photo: string | undefined | null;
+  setPhoto: (photo: string | undefined | null) => void;
 }
 
 interface IAuthProviderProps {
@@ -26,11 +36,16 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
+  const [name, setName] = useState<string | undefined | null>("");
+  const [photo, setPhoto] = useState<string | undefined | null>("");
   const [loading, setLoading] = useState(true);
 
+  console.log(user);
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setName(currentUser?.displayName);
+      setPhoto(currentUser?.photoURL);
       setLoading(false);
     });
 
@@ -53,13 +68,9 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     return signInWithPopup(auth, googleProvider);
   };
 
-
-
-  const passwordChange = (email: string) => {
-    return sendPasswordResetEmail(auth, email);
-  };
-
   const logOut = () => {
+    setName("");
+    setPhoto("");
     signOut(auth);
   };
 
@@ -70,8 +81,11 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     loginUser,
     signInWithGoogle,
     logOut,
-    passwordChange,
     setLoading,
+    name,
+    setName,
+    photo,
+    setPhoto,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

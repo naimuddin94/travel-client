@@ -40,7 +40,7 @@ const Signin = () => {
         <div className="w-full backdrop-blur-xl rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-2xl font-bold leading-tight tracking-tight md:text-4xl text-white text-center">
-              Login
+              Sign In
             </h1>
             {error && <ErrorAlert>{error}</ErrorAlert>}
             <form onSubmit={handleLogin} className="space-y-4 md:space-y-6">

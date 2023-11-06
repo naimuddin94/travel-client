@@ -1,6 +1,8 @@
+import useAuthInfo from "../../hooks/useAuthInfo";
 import CustomLink from "./CustomLink";
 
 const NavItems = () => {
+  const { user, logOut } = useAuthInfo();
   return (
     <>
       <CustomLink goto="/" text="Home" />
@@ -15,8 +17,17 @@ const NavItems = () => {
           </ul>
         </details>
       </li>
-      <CustomLink goto="/signup" text="Sign Up" />
-      <CustomLink goto="/signin" text="Sign In" />
+
+      {user ? (
+        <button className="custom-btn w-fit py-2" onClick={() => logOut()}>
+          Sign Out
+        </button>
+      ) : (
+        <>
+          <CustomLink goto="/signup" text="Sign Up" />
+          <CustomLink goto="/signin" text="Sign In" />
+        </>
+      )}
     </>
   );
 };
