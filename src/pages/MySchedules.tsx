@@ -52,7 +52,7 @@ const MySchedules = () => {
             {orders?.length === 0 && (
               <div>
                 <h2 className="text-lg text-slate-400 font-semibold text-center py-9">
-                  You have no schedule
+                  You have no orders
                 </h2>
               </div>
             )}

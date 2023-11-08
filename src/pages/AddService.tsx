@@ -5,12 +5,13 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 
+
 const AddService = () => {
   const axiosSecure = useAxiosSecure();
   const { user, name, photo } = useAuthInfo();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async (service) => {
+    mutationFn: async (service: any) => {
       const res = await axiosSecure.post("/services", service);
       return res.data;
     },
@@ -22,7 +23,7 @@ const AddService = () => {
     const serviceName: string = form.serviceName.value;
     const image: string = form.image.value;
     const tourArea: string = form.tourArea.value;
-    const price: number = form.price.value;
+    const price: string = form.price.value;
     const description: string = form.description.value;
     const service = {
       serviceName,

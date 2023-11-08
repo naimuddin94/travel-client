@@ -7,6 +7,7 @@ import ErrorAlert from "../components/utility/ErrorAlert";
 import Input from "../components/utility/Input";
 import Checkbox from "../components/utility/Checkbox";
 import SocialLoginBtn from "../components/utility/SocialLoginBtn";
+import { FirebaseError } from "firebase/app";
 
 const Signup = () => {
   const [error, setError] = useState<string | null>(null);
@@ -15,10 +16,11 @@ const Signup = () => {
 
   const handleRegister = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-    const password = event.target.password.value;
-    const photo = event.target.photo.value;
+    const form = event.target as HTMLFormElement;
+    const name = form.username.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const photo = form.photo.value;
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const hasUppercase = /[A-Z]/.test(password);
@@ -42,7 +44,7 @@ const Signup = () => {
 
     createUser(email, password)
       .then((result: UserCredential) => {
-        event.target.reset();
+        form.reset();
         navigate("/");
         setError(null);
         toast.success("Account created successfully");
@@ -56,7 +58,7 @@ const Signup = () => {
           .then(() => console.log("User name update successfully"))
           .catch((err) => toast.error("During update profile", err.message));
       })
-      .catch((err) => {
+      .catch((err: FirebaseError) => {
         setLoading(false);
         const errorCode = err.code;
         const errMessage = errorCode.replace("auth/", "");
@@ -77,7 +79,7 @@ const Signup = () => {
             </h1>
             {error && <ErrorAlert>{error}</ErrorAlert>}
             <form onSubmit={handleRegister} className="space-y-4 md:space-y-6">
-              <Input type="text" name="name" placeholder="Enter your name">
+              <Input type="text" name="username" placeholder="Enter your name">
                 Full Name
               </Input>
               <Input

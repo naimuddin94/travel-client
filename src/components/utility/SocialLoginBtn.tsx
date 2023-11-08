@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 import useAuthInfo from "../../hooks/useAuthInfo";
+import { FirebaseError } from "firebase/app";
 
 const SocialLoginBtn = () => {
   const { signInWithGoogle } = useAuthInfo();
@@ -14,7 +15,7 @@ const SocialLoginBtn = () => {
         navigate(location.state ? location.state : "/");
         toast.success("Login successfully");
       })
-      .catch((err) => {
+      .catch((err: FirebaseError) => {
         const errorCode = err.code;
         const errMessage = errorCode.replace("auth/", "");
         toast.error(errMessage);

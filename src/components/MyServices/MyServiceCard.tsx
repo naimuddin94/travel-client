@@ -1,10 +1,10 @@
 import Swal from "sweetalert2";
-import { IServiceProps } from "../../types/Types";
 import useAuthInfo from "../../hooks/useAuthInfo";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { InvalidateQueryFilters, useMutation, useQueryClient } from "@tanstack/react-query";
+import { IServiceProps } from "../../types/Types";
 
 const MyServiceCard = ({ service }: IServiceProps) => {
   const queryClient = useQueryClient();
@@ -13,14 +13,14 @@ const MyServiceCard = ({ service }: IServiceProps) => {
   const { user } = useAuthInfo();
 
   const { mutateAsync } = useMutation({
-    mutationFn: async (id: string) => {
+    mutationFn: async (id: string | undefined) => {
       const res = await axiosSecure.delete(
         `/services/${id}?email=${user?.email}`
       );
       return res.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(["myServices"]);
+      queryClient.invalidateQueries(["myServices"] as InvalidateQueryFilters);
     },
   });
 
@@ -35,7 +35,7 @@ const MyServiceCard = ({ service }: IServiceProps) => {
     status,
   } = service;
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id: string | undefined) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -46,18 +46,6 @@ const MyServiceCard = ({ service }: IServiceProps) => {
       confirmButtonText: "Yes, delete it!",
     }).then(async (result) => {
       if (result.isConfirmed) {
-        // axiosSecure
-        //   .delete(`/services/${id}?email=${user?.email}`)
-        //   .then((res) => {
-        //     if (res.data.deletedCount) {
-        //       Swal.fire({
-        //         title: "Deleted!",
-        //         text: "Service deleted successfully.",
-        //         icon: "success",
-        //       });
-        //     }
-        //   });
-
         try {
           await mutateAsync(id);
           Swal.fire({
@@ -72,7 +60,7 @@ const MyServiceCard = ({ service }: IServiceProps) => {
     });
   };
 
-  const handleStatus = (status: string, id: string) => {
+  const handleStatus = (status: string | undefined, id: string | undefined) => {
     axiosSecure
       .put(`/update-status/${id}?email=${user?.email}&status=${status}`)
       .then((res) => {
@@ -105,7 +93,7 @@ const MyServiceCard = ({ service }: IServiceProps) => {
               </p>
             </div>
             <p className="mt-3 text-gray-600 dark:text-gray-400">
-              {description.slice(0, 70)}
+              {description?.slice(0, 70)}
             </p>
             <div>
               {user?.email === providerEmail &&

@@ -7,9 +7,10 @@ import { FormEvent } from "react";
 import { MdAttachEmail } from "react-icons/md";
 
 const ServiceDetails = () => {
+  const modalElement = document.getElementById("purchase_modal") as any;
   const { user } = useAuthInfo();
   const axiosSecure = useAxiosSecure();
-  const service: IService = useLoaderData();
+  const service: IService = useLoaderData() as IService;
   const {
     image,
     serviceName,
@@ -23,6 +24,7 @@ const ServiceDetails = () => {
 
   const handleBookingForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { _id, ...serviceObj } = service;
     const form = e.target as HTMLFormElement;
     const date = form.date.value;
@@ -97,9 +99,7 @@ const ServiceDetails = () => {
 
             <div className="mt-5">
               <button
-                onClick={() =>
-                  document.getElementById("purchase_modal").showModal()
-                }
+                onClick={() => modalElement.showModal()}
                 className="custom-btn"
               >
                 Book Now

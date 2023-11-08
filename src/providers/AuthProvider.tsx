@@ -12,7 +12,7 @@ import auth from "../firebase/firebase.config";
 import { AuthContextProps, IAuthProviderProps } from "../types/Types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 
-export const AuthContext = createContext<AuthContextProps | null>(null);
+export const AuthContext = createContext<AuthContextProps | null | any>(null);
 
 const googleProvider = new GoogleAuthProvider();
 

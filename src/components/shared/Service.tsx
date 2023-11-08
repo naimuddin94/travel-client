@@ -33,7 +33,7 @@ const Service = ({ service }: IServiceProps) => {
           <h3 className="text-lg sm:text-2xl font-semibold text-gray-800 group-hover:text-[#5D50C6]">
             {serviceName}
           </h3>
-          <p className="mt-2 text-gray-600">{description.slice(0, 100)}</p>
+          <p className="mt-2 text-gray-600">{description?.slice(0, 100)}</p>
 
           <h3 className="text-xl sm:text-3xl font-black text-gray-500 py-2 group-hover:text-[#5D50C6] ">
             ${price}

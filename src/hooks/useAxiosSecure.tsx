@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useEffect } from "react";
 
-
 export const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
+  baseURL: "https://travlog-server-gebda1w0r-naimuddin94.vercel.app/api/v1",
   withCredentials: true,
 });
 

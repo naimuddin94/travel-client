@@ -1,16 +1,15 @@
 import { FormEvent } from "react";
-import { IService } from "../types/Types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuthInfo from "../hooks/useAuthInfo";
 import { Link, useLoaderData } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const UpdateService = () => {
-  const service: IService = useLoaderData();
-  const axiosSecure = useAxiosSecure();
-  const { user } = useAuthInfo();
+  const service: any = useLoaderData();
 
   const { _id, image, serviceName, description, tourArea, price } = service;
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuthInfo();
 
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -126,7 +125,10 @@ const UpdateService = () => {
               ></textarea>
             </div>
             <div className="form-control mt-3">
-              <button type="submit" className="custom-btn-two w-full rounded-md">
+              <button
+                type="submit"
+                className="custom-btn-two w-full rounded-md"
+              >
                 Update this Service
               </button>
             </div>
