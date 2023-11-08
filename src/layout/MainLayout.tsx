@@ -1,11 +1,13 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useNavigation } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import { useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "../components/utility/Loading";
 
 const MainLayout = () => {
+  const navigation = useNavigation();
   const { pathname } = useLocation();
   const url = pathname.replace("/", "");
   let title: string;
@@ -22,7 +24,7 @@ const MainLayout = () => {
       <div className="bg-gradient-to-br from-[#FF5722] h-[50rem] w-[50rem] absolute rounded-full -left-96 -top-96 blur-3xl opacity-30 -z-50"></div>
       <Navbar />
       <div className="bg-gradient-to-br from-[#FACD49] h-[40rem] w-96 absolute rounded-full -right-40 top-[38rem] blur-3xl opacity-30 -z-50"></div>
-      <Outlet />
+      {navigation.state === "loading" ? <Loading /> : <Outlet />}
       <Footer />
       <ToastContainer
         position="top-center"
