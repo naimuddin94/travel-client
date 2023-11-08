@@ -192,7 +192,10 @@ const ServiceDetails = () => {
                 ></textarea>
               </div>
               <div className="form-control mt-3">
-                <button type="submit" className="btn btn-primary">
+                <button
+                  type="submit"
+                  className="custom-btn-two w-full rounded-md"
+                >
                   Purchase this Service
                 </button>
               </div>
@@ -200,7 +203,7 @@ const ServiceDetails = () => {
           </div>
           <form method="dialog" className="absolute top-1 right-1">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-circle">❌</button>
+            <button className="btn btn-circle shadow-md">❌</button>
           </form>
         </div>
       </dialog>
