@@ -14,7 +14,7 @@ const Service = ({ service }: IServiceProps) => {
   } = service;
 
   return (
-    <div className="group sm:flex">
+    <div className="group sm:flex items-center justify-center">
       <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full h-[200px] sm:w-[250px] sm:h-[350px]">
         <img
           className="w-full h-full absolute top-0 left-0 object-cover"

@@ -4,11 +4,26 @@ import useAuthInfo from "../../hooks/useAuthInfo";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const MyServiceCard = ({ service }: IServiceProps) => {
+  const queryClient = useQueryClient();
   const { pathname } = useLocation();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuthInfo();
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id: string) => {
+      const res = await axiosSecure.delete(
+        `/services/${id}?email=${user?.email}`
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["myServices"]);
+    },
+  });
+
   const {
     _id,
     image,
@@ -29,19 +44,30 @@ const MyServiceCard = ({ service }: IServiceProps) => {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        axiosSecure
-          .delete(`/services/${id}?email=${user?.email}`)
-          .then((res) => {
-            if (res.data.deletedCount) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Service deleted successfully.",
-                icon: "success",
-              });
-            }
+        // axiosSecure
+        //   .delete(`/services/${id}?email=${user?.email}`)
+        //   .then((res) => {
+        //     if (res.data.deletedCount) {
+        //       Swal.fire({
+        //         title: "Deleted!",
+        //         text: "Service deleted successfully.",
+        //         icon: "success",
+        //       });
+        //     }
+        //   });
+
+        try {
+          await mutateAsync(id);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Service deleted successfully.",
+            icon: "success",
           });
+        } catch (error) {
+          console.log(error);
+        }
       }
     });
   };
