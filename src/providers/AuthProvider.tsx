@@ -10,10 +10,7 @@ import {
 } from "firebase/auth";
 import auth from "../firebase/firebase.config";
 import { AuthContextProps, IAuthProviderProps } from "../types/Types";
-import axios from "axios";
 import useAxiosSecure from "../hooks/useAxiosSecure";
-
-// typeset
 
 export const AuthContext = createContext<AuthContextProps | null>(null);
 
@@ -68,7 +65,7 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
   const logOut = () => {
     setName("");
     setPhoto("");
-    signOut(auth);
+    return signOut(auth);
   };
 
   const authInfo = {

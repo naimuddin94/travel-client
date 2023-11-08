@@ -23,7 +23,7 @@ export interface AuthContextProps {
   createUser: (email: string, password: string) => Promise<UserCredential>;
   loginUser: (email: string, password: string) => Promise<UserCredential>;
   signInWithGoogle: () => Promise<UserCredential>;
-  logOut: () => void;
+  logOut: () => Promise<UserCredential>;
   setLoading: (loading: boolean) => void;
   name: string | undefined | null;
   setName: (name: string | undefined | null) => void;
