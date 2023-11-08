@@ -10,14 +10,7 @@ const UpdateService = () => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuthInfo();
 
-  const {
-    _id,
-    image,
-    serviceName,
-    description,
-    tourArea,
-    price,
-  } = service;
+  const { _id, image, serviceName, description, tourArea, price } = service;
 
   const handleUpdate = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -48,8 +41,17 @@ const UpdateService = () => {
       });
   };
   return (
-    <div className="">
-      <div className="w-11/12 max-w-4xl mx-auto my-20 relative bg-gradient-to-l from-pink-50 p-10 rounded-lg shadow-2xl">
+    <div className="relative">
+      <div className="absolute -z-50 right-0 bottom-0">
+        <img src="/assets/OBJECTS.png" alt="" />
+      </div>
+      <div className="absolute -z-50 left-28 top-4">
+        <img src="/assets/Ellipse14.png" alt="" />
+      </div>
+      <div className="absolute -z-50 opacity-10">
+        <img src="/assets/Vector.png" alt="" />
+      </div>
+      <div className="w-11/12 max-w-4xl mx-auto my-20 relative bg-gradient-to-l from-pink-50 p-10 rounded-lg shadow-2xl backdrop-blur-xl">
         <div className="flex flex-col lg:flex-row">
           <div className="flex-1">
             <img
@@ -124,7 +126,7 @@ const UpdateService = () => {
               ></textarea>
             </div>
             <div className="form-control mt-3">
-              <button type="submit" className="btn btn-primary">
+              <button type="submit" className="custom-btn-two w-full rounded-md">
                 Update this Service
               </button>
             </div>
