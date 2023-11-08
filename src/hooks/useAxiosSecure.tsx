@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect } from "react";
+import useAuthInfo from "./useAuthInfo";
 
 export const axiosSecure = axios.create({
-  baseURL: "https://travlog-server-gebda1w0r-naimuddin94.vercel.app/api/v1",
+  baseURL: "https://travlog-server.vercel.app/api/v1",
   withCredentials: true,
 });
 
 const useAxiosSecure = () => {
+  // const {logOut} = useAuthInfo()
   useEffect(() => {
     axiosSecure.interceptors.response.use(
       (res) => {

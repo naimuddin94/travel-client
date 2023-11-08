@@ -3,11 +3,16 @@ import { IService } from "../types/Types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuthInfo from "../hooks/useAuthInfo";
 import { toast } from "react-toastify";
-import { FormEvent } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { MdAttachEmail } from "react-icons/md";
 
 const ServiceDetails = () => {
-  const modalElement = document.getElementById("purchase_modal") as any;
+  const [modal, setModal] = useState() as any;
+  useEffect(() => {
+    const modalElement = document.getElementById("purchase_modal") as any;
+    setModal(modalElement);
+  }, []);
+
   const { user } = useAuthInfo();
   const axiosSecure = useAxiosSecure();
   const service: IService = useLoaderData() as IService;
@@ -98,10 +103,7 @@ const ServiceDetails = () => {
             {/* <!-- End Avatar --> */}
 
             <div className="mt-5">
-              <button
-                onClick={() => modalElement.showModal()}
-                className="custom-btn"
-              >
+              <button onClick={() => modal.showModal()} className="custom-btn">
                 Book Now
               </button>
             </div>
