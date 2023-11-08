@@ -9,6 +9,7 @@ const Service = ({ service }: IServiceProps) => {
     description,
     providerImage,
     tourArea,
+    providerName,
     price,
   } = service;
 
@@ -32,13 +33,13 @@ const Service = ({ service }: IServiceProps) => {
           <h3 className="text-lg sm:text-2xl font-semibold text-gray-800 group-hover:text-[#5D50C6]">
             {serviceName}
           </h3>
-          <p className="mt-2 text-gray-600">{description}</p>
+          <p className="mt-2 text-gray-600">{description.slice(0, 100)}</p>
 
           <h3 className="text-xl sm:text-3xl font-black text-gray-500 py-2 group-hover:text-[#5D50C6] ">
             ${price}
           </h3>
-          <Link to={`/services/${_id}`}>
-            <button className="custom-btn ">Details</button>
+          <Link to={`/service/${_id}`}>
+            <button className="custom-btn mb-5">Details</button>
           </Link>
           <div className="mt-5 sm:mt-auto">
             {/* <!-- Avatar --> */}
@@ -51,7 +52,7 @@ const Service = ({ service }: IServiceProps) => {
                 />
               </div>
               <div className="ml-2.5 sm:ml-4">
-                <h4 className="font-semibold text-gray-800">Aaron Larsson</h4>
+                <h4 className="font-semibold text-gray-800">{providerName}</h4>
                 <p className="text-xs text-gray-500">Provider</p>
               </div>
             </div>

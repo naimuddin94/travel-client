@@ -7,26 +7,28 @@ import Input from "../components/utility/Input";
 import Checkbox from "../components/utility/Checkbox";
 import SocialLoginBtn from "../components/utility/SocialLoginBtn";
 import ErrorAlert from "../components/utility/ErrorAlert";
+import { FirebaseError } from "firebase/app";
 
 const Signin = () => {
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { loginUser, loading, setLoading } = useAuthInfo();
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleLogin = (e: FormEvent) => {
+  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
+    const form = e.target as HTMLFormElement;
+    const email = form.email.value;
+    const password = form.password.value;
     loginUser(email, password)
       .then(() => {
         navigate(location.state ? location.state : "/");
         toast.success("Login successfully");
         setError(null);
-        e.target.reset();
+        form.reset();
       })
-      .catch((err) => {
+      .catch((err: FirebaseError) => {
         setLoading(false);
         const errorCode = err.code;
         const errMessage = errorCode.replace("auth/", "");

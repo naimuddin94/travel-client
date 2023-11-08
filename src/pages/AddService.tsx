@@ -1,17 +1,21 @@
 import { FormEvent } from "react";
 import Input from "../components/utility/Input";
 import useAuthInfo from "../hooks/useAuthInfo";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const AddService = () => {
+  const axiosSecure = useAxiosSecure();
+
   const { user, name, photo } = useAuthInfo();
-  const handleProduct = (event: FormEvent) => {
+  const handleProduct = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const form = event.target;
-    const serviceName = form.serviceName.value;
-    const image = form.image.value;
-    const tourArea = form.tourArea.value;
-    const price = form.price.value;
-    const description = form.description.value;
+    const form = event.target as HTMLFormElement;
+    const serviceName: string = form.serviceName.value;
+    const image: string = form.image.value;
+    const tourArea: string = form.tourArea.value;
+    const price: number = form.price.value;
+    const description: string = form.description.value;
     const service = {
       serviceName,
       image,
@@ -22,7 +26,13 @@ const AddService = () => {
       providerName: name,
       providerEmail: user?.email,
     };
-    console.log(service);
+
+    axiosSecure.post("/services", service).then((res) => {
+      if (res.data.insertedId) {
+        toast.success("Service added successfully");
+        form.reset();
+      }
+    });
   };
 
   return (

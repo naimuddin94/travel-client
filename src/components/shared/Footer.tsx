@@ -1,4 +1,5 @@
 import { FaTwitter, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -9,10 +10,7 @@ const Footer = () => {
             <img src="/assets/logo.png" alt="" className="w-8" />
             <h2 className="font-bold">Travlog</h2>
           </div>
-          <p>
-            Contrary to popular belief, Lorem Ipsum is not simply random text.
-            It has roots in a piece of classical Latin literature from 45 BC.
-          </p>
+          <p>Plot 14, Block B, Kolatoli Road, Cox's Bazar, Bangladesh</p>
           <div className="flex gap-3 text-white">
             <div className="p-2 rounded-full bg-[#5D50C6] cursor-pointer hover:brightness-75">
               <FaFacebookF />
@@ -33,11 +31,20 @@ const Footer = () => {
           <a className="link link-hover">Advertisement</a>
         </nav>
         <nav>
-          <header className="footer-title">Company</header>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Jobs</a>
-          <a className="link link-hover">Press kit</a>
+          <header className="footer-title">Menu</header>
+
+          <Link to="/" className="link link-hover">
+            Home
+          </Link>
+          <Link to="/services" className="link link-hover">
+            Services
+          </Link>
+          <Link to="/signup" className="link link-hover">
+            Signup
+          </Link>
+          <Link to="/signin" className="link link-hover">
+            Signin
+          </Link>
         </nav>
         <nav>
           <header className="footer-title">Legal</header>

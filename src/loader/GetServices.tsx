@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const GetServices = () => {
+  const axiosSecure = useAxiosSecure();
   const result = useQuery({
     queryKey: ["services"],
     queryFn: async () => {
-      const res = await axios.get("/services.json");
+      const res = await axiosSecure("/services");
       return res.data;
     },
   });

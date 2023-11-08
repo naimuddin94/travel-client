@@ -2,6 +2,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import Footer from "../components/shared/Footer";
 import { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MainLayout = () => {
   const { pathname } = useLocation();
@@ -22,6 +24,18 @@ const MainLayout = () => {
       <div className="bg-gradient-to-br from-[#FACD49] h-[40rem] w-96 absolute rounded-full -right-40 top-[38rem] blur-3xl opacity-30 -z-50"></div>
       <Outlet />
       <Footer />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };

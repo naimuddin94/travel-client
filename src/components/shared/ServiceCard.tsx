@@ -20,16 +20,16 @@ const ServiceCard = ({ service }: IServiceProps) => {
           {tourArea}
         </p>
       </div>
-      <div className="p-5">
+      <div className="p-3 flex flex-col justify-between h-64">
         <div>
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+          <h5 className="text-xl font-bold tracking-tight text-gray-900 whitespace-nowrap">
             {serviceName}
           </h5>
         </div>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          {description}
+        <p className="font-normal text-sm text-gray-700 dark:text-gray-400">
+          {description.slice(0,100)}
         </p>
-        <div className="flex items-center py-5 gap-4">
+        <div className="flex items-center gap-2">
           <img
             className="rounded-full w-9 h-9"
             src={providerImage}
@@ -43,7 +43,7 @@ const ServiceCard = ({ service }: IServiceProps) => {
 
         <div className="flex items-center justify-between">
           <span className="text-3xl font-bold text-gray-600">${price}</span>
-          <Link to={`/services/${_id}`}>
+          <Link to={`/service/${_id}`}>
             <button className="custom-btn gradient">Details</button>
           </Link>
         </div>

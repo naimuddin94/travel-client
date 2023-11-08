@@ -10,11 +10,16 @@ import AddService from "../pages/AddService";
 import MySchedules from "../pages/MySchedules";
 import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../pages/ServiceDetails";
+import { axiosSecure } from "../hooks/useAxiosSecure";
+import UpdateService from "../pages/UpdateService";
+import NotFound from "../pages/NotFound";
+import SearchResult from "../pages/SearchResult";
 
 const router: Router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
+    errorElement: <NotFound />,
     children: [
       {
         path: "/",
@@ -57,12 +62,32 @@ const router: Router = createBrowserRouter([
         ),
       },
       {
-        path: "/services/:id",
+        path: "/search-result",
+        element: <SearchResult />,
+      },
+      {
+        path: "/service/:id",
         element: (
           <PrivateRoute>
             <ServiceDetails />
           </PrivateRoute>
         ),
+        loader: async ({ params }) => {
+          const res = await axiosSecure(`/services/${params.id}`);
+          return res.data;
+        },
+      },
+      {
+        path: "/update-service/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateService />
+          </PrivateRoute>
+        ),
+        loader: async ({ params }) => {
+          const res = await axiosSecure(`/services/${params.id}`);
+          return res.data;
+        },
       },
     ],
   },

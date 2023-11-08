@@ -26,7 +26,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`navbar h-12 common-padding fixed z-50 ${
+      className={`navbar h-12 common-padding fixed z-50 max-w-[1440px] mx-auto ${
         scrolling
           ? "bg-gradient-to-r from-[#f85e9e79] to-[#5e50c67b] backdrop-blur"
           : "bg-transparent"
