@@ -47,6 +47,7 @@ const ServiceDetails = () => {
       .then((res) => {
         if (res.data.insertedId) {
           toast.success("Booking successfully");
+          // modal.removeAttribute("open");
           form.reset();
         }
       })

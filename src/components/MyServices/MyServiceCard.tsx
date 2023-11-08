@@ -1,12 +1,28 @@
 import Swal from "sweetalert2";
 import useAuthInfo from "../../hooks/useAuthInfo";
+import { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { InvalidateQueryFilters, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  InvalidateQueryFilters,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { IServiceProps } from "../../types/Types";
 
 const MyServiceCard = ({ service }: IServiceProps) => {
+  const {
+    _id,
+    image,
+    serviceName,
+    description,
+    providerEmail,
+    tourArea,
+    price,
+    status,
+  } = service;
+  const [loadedStatus, setLoadedStatus] = useState<string | undefined>(status);
   const queryClient = useQueryClient();
   const { pathname } = useLocation();
   const axiosSecure = useAxiosSecure();
@@ -23,17 +39,6 @@ const MyServiceCard = ({ service }: IServiceProps) => {
       queryClient.invalidateQueries(["myServices"] as InvalidateQueryFilters);
     },
   });
-
-  const {
-    _id,
-    image,
-    serviceName,
-    description,
-    providerEmail,
-    tourArea,
-    price,
-    status,
-  } = service;
 
   const handleDelete = (id: string | undefined) => {
     Swal.fire({
@@ -65,7 +70,8 @@ const MyServiceCard = ({ service }: IServiceProps) => {
       .put(`/update-status/${id}?email=${user?.email}&status=${status}`)
       .then((res) => {
         if (res.data.modifiedCount) {
-          toast.success("Updated successfully");
+          toast.success("Status updated successfully");
+          setLoadedStatus(status);
         }
       });
   };
@@ -113,13 +119,23 @@ const MyServiceCard = ({ service }: IServiceProps) => {
               {pathname === "/my-schedules" &&
                 providerEmail === user?.email && (
                   <div className="dropdown dropdown-bottom">
-                    <label tabIndex={0} className="btn m-1 bg-[#F85E9F]">
-                      {status}
+                    <label
+                      tabIndex={0}
+                      className={`m-1 custom-btn ${
+                        loadedStatus === "completed"
+                          ? "bg-[#5D50C6]"
+                          : "bg-[#F85E9F]"
+                      }`}
+                    >
+                      {loadedStatus}
                     </label>
                     <ul
                       tabIndex={0}
                       className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
                     >
+                      <li onClick={() => handleStatus("pending", _id)}>
+                        <a>Pending</a>
+                      </li>
                       <li onClick={() => handleStatus("progress", _id)}>
                         <a>Progress</a>
                       </li>
@@ -131,7 +147,7 @@ const MyServiceCard = ({ service }: IServiceProps) => {
                 )}
               {pathname === "/my-schedules" &&
                 providerEmail !== user?.email && (
-                  <button className="custom-btn">{status}</button>
+                  <button className="custom-btn">{loadedStatus}</button>
                 )}
             </div>
           </div>

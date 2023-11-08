@@ -1,20 +1,26 @@
 import { MdCardTravel, MdPlayCircleFilled } from "react-icons/md";
 import { FaTelegramPlane, FaUserPlus, FaMapMarkerAlt } from "react-icons/fa";
+import { Typewriter } from "react-simple-typewriter";
 
 const Banner = () => {
   return (
-    <div className="flex flex-col lg:flex-row justify-between items-center common-padding mt-12">
+    <div className="flex flex-col lg:flex-row justify-between items-center common-padding mt-16 lg:mt-12">
       <div className="space-y-8">
         <div className="bg-white theme-text text-sm sm:text-base font-semibold w-fit px-6 flex items-center gap-2 py-2 rounded-full">
           Explore the Cox's bazar!
           <MdCardTravel />
         </div>
-        <h1 className="text-4xl md:text-5xl xl:text-7xl font-bold">
+        <h1 className="text-4xl md:text-5xl xl:text-7xl font-bold h-40 md:h-48 lg:h-64 xl:h-72">
           Travel{" "}
           <span className="theme-text">
             top <br /> destination <br />
           </span>{" "}
-          of the Chittagong
+          of the <br />
+          <Typewriter
+            words={["Chittagong", "Cox's bazar", "Sylhet", "Saintmartin"]}
+            loop={true}
+            cursor
+          />
         </h1>
         <p className="text-slate-500 text-sm">
           We always make our customer happy by providing <br /> as many choices
