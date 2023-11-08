@@ -16,11 +16,13 @@ const Banner = () => {
             top <br /> destination <br />
           </span>{" "}
           of the <br />
-          <Typewriter
-            words={["Chittagong", "Cox's bazar", "Sylhet", "Saintmartin"]}
-            loop={true}
-            cursor
-          />
+          <span className="theme-text">
+            <Typewriter
+              words={["Chittagong", "Cox's bazar", "Sylhet", "Saintmartin"]}
+              loop={true}
+              cursor
+            />
+          </span>
         </h1>
         <p className="text-slate-500 text-sm">
           We always make our customer happy by providing <br /> as many choices
