@@ -3,12 +3,20 @@ import Input from "../components/utility/Input";
 import useAuthInfo from "../hooks/useAuthInfo";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
 
 const AddService = () => {
   const axiosSecure = useAxiosSecure();
-
   const { user, name, photo } = useAuthInfo();
-  const handleProduct = (event: FormEvent<HTMLFormElement>) => {
+
+  const { mutateAsync } = useMutation({
+    mutationFn: async (service) => {
+      const res = await axiosSecure.post("/services", service);
+      return res.data;
+    },
+  });
+
+  const handleProduct = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const serviceName: string = form.serviceName.value;
@@ -27,12 +35,13 @@ const AddService = () => {
       providerEmail: user?.email,
     };
 
-    axiosSecure.post("/services", service).then((res) => {
-      if (res.data.insertedId) {
-        toast.success("Service added successfully");
-        form.reset();
-      }
-    });
+    try {
+      await mutateAsync(service);
+      toast.success("Service added successfully");
+      form.reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

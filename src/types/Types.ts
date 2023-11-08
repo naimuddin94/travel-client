@@ -1,13 +1,13 @@
 import { User, UserCredential } from "firebase/auth";
 import { ReactNode } from "react";
 export interface IService {
-  _id: string;
+  _id?: string;
   image: string;
   serviceName: string;
   description: string;
   providerImage: string;
   providerName?: string;
-  providerEmail: string;
+  providerEmail?: string;
   tourArea: string;
   price: number;
   status?: string;
