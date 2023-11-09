@@ -5,7 +5,7 @@ import auth from "../firebase/firebase.config";
 import { Navigate } from "react-router-dom";
 
 export const axiosSecure = axios.create({
-  baseURL: "https://travlog-server.vercel.app/api/v1",
+  baseURL: "http://localhost:5000/api/v1",
   withCredentials: true,
 });
 

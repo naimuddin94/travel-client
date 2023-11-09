@@ -5,6 +5,7 @@ import useAuthInfo from "../hooks/useAuthInfo";
 import { toast } from "react-toastify";
 import { FormEvent, useState, useEffect, useRef } from "react";
 import { MdAttachEmail } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const ServiceDetails = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -71,7 +72,13 @@ const ServiceDetails = () => {
     <>
       <div className="px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto mt-6">
         {/* <!-- Grid --> */}
-        <div className="grid sm:grid-cols-2 sm:items-center gap-8">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, x: 200 }}
+          whileInView={{ x: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="grid sm:grid-cols-2 sm:items-center gap-8"
+        >
           <div className="sm:order-2">
             <div className="relative pt-[50%] sm:pt-[100%] rounded-lg">
               <img
@@ -83,7 +90,13 @@ const ServiceDetails = () => {
           </div>
           {/* <!-- End Col --> */}
 
-          <div className="sm:order-1">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5, y: 200 }}
+            whileInView={{ y: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            className="sm:order-1"
+          >
             <p className="mb-5 inline-flex items-center gap-1.5 py-1.5 px-3 rounded-md text-xs font-medium bg-pink-200 text-gray-800">
               {tourArea}
             </p>
@@ -119,9 +132,9 @@ const ServiceDetails = () => {
                 Book Now
               </button>
             </div>
-          </div>
+          </motion.div>
           {/* <!-- End Col --> */}
-        </div>
+        </motion.div>
         {/* <!-- End Grid --> */}
       </div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
