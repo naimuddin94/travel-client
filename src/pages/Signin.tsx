@@ -9,6 +9,8 @@ import SocialLoginBtn from "../components/utility/SocialLoginBtn";
 import ErrorAlert from "../components/utility/ErrorAlert";
 import { FirebaseError } from "firebase/app";
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
+import animationdata from "../assets/animation/login.json"
 
 const Signin = () => {
   const [error, setError] = useState<string | null>(null);
@@ -38,17 +40,27 @@ const Signin = () => {
   };
 
   return (
-    <section className="signin-background">
+    <section className="relative py-16">
+      <div className="absolute opacity-20 -z-50">
+        <img src="/assets/Vector.png" alt="" />
+      </div>
+      <div className="absolute w-[70%] flex justify-center items-center opacity-30 -z-50">
+        <Lottie animationData={animationdata}></Lottie>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, scale: 0.5, y: 200 }}
         whileInView={{ y: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+        className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 relative"
       >
+        <div className="absolute left-[64%] -top-0">
+          <img src="/assets/Ellipse14.png" alt="" />
+        </div>
         <div className="w-full backdrop-blur-xl rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-2xl font-bold leading-tight tracking-tight md:text-4xl text-white text-center">
+            <h1 className="text-2xl font-bold leading-tight tracking-tight md:text-4xl text-slate-400 text-center">
               Sign In
             </h1>
             {error && <ErrorAlert>{error}</ErrorAlert>}

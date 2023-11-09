@@ -3,9 +3,7 @@ import GetServices from "../../../loader/GetServices";
 import ServiceCard from "../../shared/ServiceCard";
 import Loading from "../../utility/Loading";
 import { IService } from "../../../types/Types";
-import {motion} from "framer-motion"
-
-
+import { motion } from "framer-motion";
 
 const PopularServices = () => {
   const { data: services, isLoading } = GetServices();
@@ -30,7 +28,7 @@ const PopularServices = () => {
           Explore popular destination
         </h1>
       </motion.div>
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 ">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4 ">
         {services?.slice(0, 4).map((service: IService) => (
           <ServiceCard key={service._id} service={service} />
         ))}

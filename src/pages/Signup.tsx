@@ -9,6 +9,8 @@ import Checkbox from "../components/utility/Checkbox";
 import SocialLoginBtn from "../components/utility/SocialLoginBtn";
 import { FirebaseError } from "firebase/app";
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
+import animationData from "../assets/animation/login.json"
 
 const Signup = () => {
   const [error, setError] = useState<string | null>(null);
@@ -68,20 +70,29 @@ const Signup = () => {
   };
 
   return (
-    <section className="signin-background">
+    <section className="relative py-16">
+      <div className="absolute opacity-20 -z-50">
+        <img src="/assets/Vector.png" alt="" />
+      </div>
+      <div className="absolute w-[70%] flex justify-center items-center opacity-30 -z-50">
+        <Lottie animationData={animationData}></Lottie>
+      </div>
       <motion.div
         initial={{ opacity: 0, scale: 0.5, y: 200 }}
         whileInView={{ y: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col items-center justify-center px-6 py-8 mx-auto"
+        className="flex flex-col items-center justify-center px-6 py-8 mx-auto relative"
       >
+        <div className="absolute left-[64%] -top-0">
+          <img src="/assets/Ellipse14.png" alt="" />
+        </div>
         <div
           data-aos="flip-left"
           className="w-full rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 backdrop-blur-lg border-gray-700"
         >
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-2xl text-center font-bold leading-tight tracking-tight md:text-4xl text-white">
+            <h1 className="text-2xl text-center font-bold leading-tight tracking-tight md:text-4xl text-slate-400">
               Sign Up
             </h1>
             {error && <ErrorAlert>{error}</ErrorAlert>}
