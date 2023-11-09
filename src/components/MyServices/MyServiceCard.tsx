@@ -11,11 +11,8 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { IServiceProps } from "../../types/Types";
-import { hiddenMask, visibleMask } from "../shared/Service";
 
 const MyServiceCard = ({ service }: IServiceProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
   const {
     _id,
     image,
@@ -44,6 +41,18 @@ const MyServiceCard = ({ service }: IServiceProps) => {
     },
   });
 
+  const { mutateAsync: deleteBookingAsync } = useMutation({
+    mutationFn: async (id: string | undefined) => {
+      const res = await axiosSecure.delete(
+        `/delete-booking/${id}?email=${user?.email}`
+      );
+      return res.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["orders"] as InvalidateQueryFilters);
+    },
+  });
+
   const handleDelete = (id: string | undefined) => {
     Swal.fire({
       title: "Are you sure?",
@@ -69,6 +78,31 @@ const MyServiceCard = ({ service }: IServiceProps) => {
     });
   };
 
+  const handleDeleteBooking = (id: string | undefined) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          await deleteBookingAsync(id);
+          Swal.fire({
+            title: "Deleted!",
+            text: "Deleted successfully.",
+            icon: "success",
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    });
+  };
+
   const handleStatus = (status: string | undefined, id: string | undefined) => {
     axiosSecure
       .put(`/update-status/${id}?email=${user?.email}&status=${status}`)
@@ -83,15 +117,10 @@ const MyServiceCard = ({ service }: IServiceProps) => {
   return (
     <>
       <motion.div
-        initial={false}
-        animate={
-          isLoaded && isInView
-            ? { WebkitMaskImage: visibleMask, maskImage: visibleMask }
-            : { WebkitMaskImage: hiddenMask, maskImage: hiddenMask }
-        }
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        onViewportEnter={() => setIsInView(true)}
+        initial={{ opacity: 0, scale: 0.5, x: -200, rotate: 10 }}
+        whileInView={{ x: 0, rotate: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6 }}
         className="group rounded-xl"
       >
         <div className="sm:flex">
@@ -100,7 +129,6 @@ const MyServiceCard = ({ service }: IServiceProps) => {
               className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 left-0 object-cover rounded-xl"
               src={image}
               alt={serviceName}
-              onLoad={() => setIsLoaded(true)}
             />
           </div>
 
@@ -163,7 +191,15 @@ const MyServiceCard = ({ service }: IServiceProps) => {
                 )}
               {pathname === "/my-schedules" &&
                 providerEmail !== user?.email && (
-                  <button className="custom-btn">{loadedStatus}</button>
+                  <>
+                    <button className="custom-btn mr-2">{loadedStatus}</button>
+                    <button
+                      onClick={() => handleDeleteBooking(_id)}
+                      className="custom-btn-two hover:bg-[#F85E9F]"
+                    >
+                      Delete
+                    </button>
+                  </>
                 )}
             </div>
           </div>

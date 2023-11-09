@@ -43,6 +43,13 @@ const ServiceDetails = () => {
       status: "pending",
     };
 
+    if (user?.email === providerEmail) {
+      if (formRef.current) {
+        formRef.current.submit();
+      }
+      return toast.error("Its's your service");
+    }
+
     axiosSecure
       .post("/booking", bookingService)
       .then((res) => {
@@ -128,7 +135,10 @@ const ServiceDetails = () => {
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
-            <form onSubmit={handleBookingForm} className="card-body pt-2 px-0 flex-1 py-0 lg:px-4">
+            <form
+              onSubmit={handleBookingForm}
+              className="card-body pt-2 px-0 flex-1 py-0 lg:px-4"
+            >
               <h2 className="text-slate-400 flex gap-1 items-center">
                 <MdAttachEmail />
                 {user?.email}
