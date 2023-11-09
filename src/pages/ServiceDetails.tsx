@@ -3,10 +3,11 @@ import { IService } from "../types/Types";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import useAuthInfo from "../hooks/useAuthInfo";
 import { toast } from "react-toastify";
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState, useEffect, useRef } from "react";
 import { MdAttachEmail } from "react-icons/md";
 
 const ServiceDetails = () => {
+  const formRef = useRef<HTMLFormElement>(null);
   const [modal, setModal] = useState() as any;
   useEffect(() => {
     const modalElement = document.getElementById("purchase_modal") as any;
@@ -48,7 +49,10 @@ const ServiceDetails = () => {
         if (res.data.insertedId) {
           toast.success("Booking successfully");
           // modal.removeAttribute("open");
-          form.reset();
+          if (formRef.current) {
+            // Call the submit method of the form
+            formRef.current.submit();
+          }
         }
       })
       .catch((err) => {
@@ -124,13 +128,13 @@ const ServiceDetails = () => {
                 className="w-full h-full object-cover rounded-lg"
               />
             </div>
-            <form onSubmit={handleBookingForm} className="card-body flex-1">
+            <form onSubmit={handleBookingForm} className="card-body pt-2 px-0 flex-1 py-0 lg:px-4">
               <h2 className="text-slate-400 flex gap-1 items-center">
                 <MdAttachEmail />
                 {user?.email}
               </h2>
               <div className="flex flex-col md:flex-row gap-3">
-                <div className="form-control">
+                <div className="form-control flex-[3]">
                   <label className="label">
                     <span className="label-text">Service Name</span>
                   </label>
@@ -144,7 +148,7 @@ const ServiceDetails = () => {
                     required
                   />
                 </div>
-                <div className="form-control">
+                <div className="form-control flex-[2]">
                   <label className="label">
                     <span className="label-text">Price</span>
                   </label>
@@ -160,7 +164,7 @@ const ServiceDetails = () => {
                 </div>
               </div>
               <div className="flex flex-col md:flex-row gap-3">
-                <div className="form-control">
+                <div className="form-control flex-[3]">
                   <label className="label">
                     <span className="label-text">Provider Email</span>
                   </label>
@@ -174,7 +178,7 @@ const ServiceDetails = () => {
                     required
                   />
                 </div>
-                <div className="form-control">
+                <div className="form-control flex-[2]">
                   <label className="label">
                     <span className="label-text">Date</span>
                   </label>
@@ -204,8 +208,11 @@ const ServiceDetails = () => {
               </div>
             </form>
           </div>
-          <form method="dialog" className="absolute top-1 right-1">
-            {/* if there is a button in form, it will close the modal */}
+          <form
+            method="dialog"
+            className="absolute top-1 right-1"
+            ref={formRef}
+          >
             <button className="btn btn-circle shadow-md">❌</button>
           </form>
         </div>
