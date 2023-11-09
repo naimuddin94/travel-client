@@ -4,7 +4,7 @@ import useAuthInfo from "../hooks/useAuthInfo";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
-
+import { motion } from "framer-motion";
 
 const AddService = () => {
   const axiosSecure = useAxiosSecure();
@@ -48,7 +48,13 @@ const AddService = () => {
   return (
     <div className="relative overflow-hidden">
       <div className="mx-auto max-w-screen-md py-12 px-4 sm:px-6 md:max-w-screen-xl md:py-20 lg:py-32 md:px-8">
-        <div className="md:pr-8 md:w-1/2 xl:pr-0 xl:w-5/12">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, y: 200 }}
+          whileInView={{ y: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7 }}
+          className="md:pr-8 md:w-1/2 xl:pr-0 xl:w-5/12"
+        >
           {/* <!-- Title --> */}
           <h1 className="text-center text-3xl font-black text-slate-500 md:text-4xl md:leading-tight lg:text-5xl lg:leading-tight  mb-8 text-gradient">
             Add Service
@@ -72,10 +78,16 @@ const AddService = () => {
             </button>
           </form>
           {/* <!-- End Form --> */}
-        </div>
+        </motion.div>
       </div>
 
-      <div className="hidden md:block bg-pink-500/20 bg-blend-overlay md:absolute md:top-0 md:left-1/2 md:right-0 h-full bg-[url('https://images.unsplash.com/photo-1587302525159-2363f54affd4?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-no-repeat bg-center bg-cover"></div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5, x: 200 }}
+        whileInView={{ x: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="hidden md:block bg-pink-500/20 bg-blend-overlay md:absolute md:top-0 md:left-1/2 md:right-0 h-full bg-[url('https://images.unsplash.com/photo-1587302525159-2363f54affd4?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-no-repeat bg-center bg-cover"
+      ></motion.div>
       {/* <!-- End Col --> */}
     </div>
   );

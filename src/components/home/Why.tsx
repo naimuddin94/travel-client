@@ -1,6 +1,13 @@
+import {motion} from "framer-motion"
+
 const Why = () => {
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5, x: 100 }}
+      whileInView={{ x: 0}}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1 }}
+    >
       <div className="lg:grid gap-5 grid-cols-10 justify-between items-center common-padding py-8">
         <div className="col-span-4 text-center lg:text-left">
           <h4 className="font-semibold theme-text uppercase">Why Us</h4>
@@ -37,7 +44,7 @@ const Why = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

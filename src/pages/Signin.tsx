@@ -8,6 +8,7 @@ import Checkbox from "../components/utility/Checkbox";
 import SocialLoginBtn from "../components/utility/SocialLoginBtn";
 import ErrorAlert from "../components/utility/ErrorAlert";
 import { FirebaseError } from "firebase/app";
+import { motion } from "framer-motion";
 
 const Signin = () => {
   const [error, setError] = useState<string | null>(null);
@@ -38,7 +39,13 @@ const Signin = () => {
 
   return (
     <section className="signin-background">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5, y: 200 }}
+        whileInView={{ y: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+      >
         <div className="w-full backdrop-blur-xl rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-2xl font-bold leading-tight tracking-tight md:text-4xl text-white text-center">
@@ -91,7 +98,7 @@ const Signin = () => {
             <SocialLoginBtn />
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

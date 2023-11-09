@@ -1,13 +1,20 @@
 import { MdCardTravel, MdPlayCircleFilled } from "react-icons/md";
 import { FaTelegramPlane, FaUserPlus, FaMapMarkerAlt } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 
 const Banner = () => {
   return (
     <div className="flex flex-col lg:flex-row justify-between items-center common-padding mt-16 lg:mt-12">
-      <div className="space-y-8">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5, y: 200 }}
+        whileInView={{ y: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.7 }}
+        className="space-y-8"
+      >
         <div className="bg-white theme-text text-sm sm:text-base font-semibold w-fit px-6 flex items-center gap-2 py-2 rounded-full">
-          Explore the Cox's bazar!
+          Explore the Chittagong!
           <MdCardTravel />
         </div>
         <h1 className="text-4xl md:text-5xl xl:text-7xl font-bold h-40 md:h-48 lg:h-64 xl:h-72">
@@ -18,7 +25,13 @@ const Banner = () => {
           of the <br />
           <span className="theme-text">
             <Typewriter
-              words={["Chittagong", "Cox's bazar", "Sylhet", "Saintmartin"]}
+              words={[
+                "Chittagong",
+                "Cox's bazar",
+                "Bandarban",
+                "Saintmartin",
+                "Rangamati",
+              ]}
               loop={true}
               cursor
             />
@@ -35,8 +48,14 @@ const Banner = () => {
             Watch Demo
           </button>
         </div>
-      </div>
-      <div className="flex gap-6 bg-[url('/assets/layer.png')] bg-top p-5 md:p-16 bg-no-repeat bg-contain">
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.5, x: 200 }}
+        whileInView={{ x: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+        className="flex gap-6 bg-[url('/assets/layer.png')] bg-top p-5 md:p-16 bg-no-repeat bg-contain"
+      >
         <div className="flex flex-col gap-6">
           <div className="relative">
             <img src="/assets/Rectangle1.png" alt="" className="" />
@@ -58,7 +77,7 @@ const Banner = () => {
             <p className="font-semibold text-sm">Top Places</p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

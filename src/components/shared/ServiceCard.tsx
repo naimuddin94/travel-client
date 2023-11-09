@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { IServiceProps } from "../../types/Types";
+import { motion } from "framer-motion";
 
 const ServiceCard = ({ service }: IServiceProps) => {
   const {
@@ -13,7 +14,13 @@ const ServiceCard = ({ service }: IServiceProps) => {
     price,
   } = service;
   return (
-    <div className=" rounded-xl shadow">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5, x: -200, rotate: -50 }}
+      whileInView={{ x: 0, rotate: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1 }}
+      className=" rounded-xl shadow"
+    >
       <div className="relative">
         <img className="rounded-t-lg w-full h-52" src={image} alt="" />
         <p className="py-1 px-4 rounded-full backdrop-blur-3xl text-white absolute bottom-2 right-2 shadow-xs shadow-[#F85E9F] text-sm font-semibold">
@@ -27,7 +34,7 @@ const ServiceCard = ({ service }: IServiceProps) => {
           </h5>
         </div>
         <p className="font-normal text-sm text-gray-700 dark:text-gray-400">
-          {description.slice(0,100)}
+          {description.slice(0, 100)}
         </p>
         <div className="flex items-center gap-2">
           <img
@@ -48,7 +55,7 @@ const ServiceCard = ({ service }: IServiceProps) => {
           </Link>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,9 +1,16 @@
 import { HiMapPin, HiMiniTicket } from "react-icons/hi2";
 import { BsFillCalendarDayFill } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const FeaturesHero = () => {
   return (
-    <div className="flex-1">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.5, x: -300 }}
+      whileInView={{ x: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1 }}
+      className="flex-1"
+    >
       <h3 className="theme-text font-semibold uppercase">Key features</h3>
       <h2 className="text-xl md:text-4xl font-black">We offer best services</h2>
       <p className="py-5 text-slate-600 text-sm">
@@ -40,7 +47,7 @@ const FeaturesHero = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

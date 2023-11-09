@@ -61,7 +61,7 @@ const UpdateService = () => {
           </div>
           <form onSubmit={handleUpdate} className="card-body flex-1 py-0">
             <div className="flex flex-col md:flex-row gap-3">
-              <div className="form-control">
+              <div className="form-control flex-[3]">
                 <label className="label">
                   <span className="label-text">Service Area</span>
                 </label>
@@ -74,7 +74,7 @@ const UpdateService = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control flex-[2]">
                 <label className="label">
                   <span className="label-text">Price</span>
                 </label>

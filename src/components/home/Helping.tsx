@@ -1,4 +1,5 @@
 import { TbDiscount2 } from "react-icons/tb";
+import { motion } from "framer-motion";
 
 const Helping = () => {
   return (
@@ -6,7 +7,11 @@ const Helping = () => {
       <div className="w-72 md:w-96 h-72 md:h-[22rem] bg-[#FACD49] -z-50 absolute rounded-r-full"></div>
       <div className="flex flex-col lg:flex-row">
         <div className="flex-1 relative min-h-[300px] sm:min-h-[320px] md:min-h-[380px]">
-          <img
+          <motion.img
+            initial={{ opacity: 0, scale: 0.5, y: -300 }}
+            whileInView={{ y: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
             src="/assets/project.png"
             alt=""
             className="w-[30rem] absolute -top-24 md:-top-28"
@@ -19,7 +24,13 @@ const Helping = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 space-y-3 ml-auto px-5 lg:pr-10 w-fit text-right lg:text-left">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, x: 200, rotate: 10 }}
+          whileInView={{ x: 0, rotate: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1 }}
+          className="flex-1 space-y-3 ml-auto px-5 lg:pr-10 w-fit text-right lg:text-left"
+        >
           <h4 className="theme-text uppercase font-semibold">Travel Point</h4>
           <h1 className="text-3xl md:text-5xl font-black">
             We helping you find <br /> your dream location
@@ -46,7 +57,7 @@ const Helping = () => {
               <p className="text-xs">Happy Customer</p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

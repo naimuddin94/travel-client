@@ -4,14 +4,18 @@ import { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import {
   InvalidateQueryFilters,
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
 import { IServiceProps } from "../../types/Types";
+import { hiddenMask, visibleMask } from "../shared/Service";
 
 const MyServiceCard = ({ service }: IServiceProps) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const {
     _id,
     image,
@@ -78,13 +82,25 @@ const MyServiceCard = ({ service }: IServiceProps) => {
 
   return (
     <>
-      <div className="group rounded-xl">
+      <motion.div
+        initial={false}
+        animate={
+          isLoaded && isInView
+            ? { WebkitMaskImage: visibleMask, maskImage: visibleMask }
+            : { WebkitMaskImage: hiddenMask, maskImage: hiddenMask }
+        }
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+        onViewportEnter={() => setIsInView(true)}
+        className="group rounded-xl"
+      >
         <div className="sm:flex">
           <div className="flex-shrink-0 relative rounded-xl overflow-hidden w-full sm:w-56 h-44">
             <img
               className="group-hover:scale-105 transition-transform duration-500 ease-in-out w-full h-full absolute top-0 left-0 object-cover rounded-xl"
               src={image}
               alt={serviceName}
+              onLoad={() => setIsLoaded(true)}
             />
           </div>
 
@@ -152,7 +168,7 @@ const MyServiceCard = ({ service }: IServiceProps) => {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };
