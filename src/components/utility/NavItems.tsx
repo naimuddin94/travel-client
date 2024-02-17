@@ -17,6 +17,7 @@ const NavItems = () => {
                 <CustomLink goto="/my-services" text="My Services" />
                 <CustomLink goto="/add-service" text="Add Service" />
                 <CustomLink goto="/my-schedules" text="My Schedules" />
+                <CustomLink goto="/cart" text="My Cart" />
               </ul>
             </details>
           </li>

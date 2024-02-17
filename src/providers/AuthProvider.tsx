@@ -23,31 +23,6 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [photo, setPhoto] = useState<string | undefined | null>("");
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      const userEmail = currentUser?.email || user?.email;
-      const loggedUser = { email: userEmail };
-      setUser(currentUser);
-      setName(currentUser?.displayName);
-      setPhoto(currentUser?.photoURL);
-      setLoading(false);
-      // if user exists then issue a token
-      if (currentUser) {
-        axiosSecure.post("/jwt", loggedUser).then((res) => {
-          console.log(res.data);
-        });
-      } else {
-        axiosSecure.post("/logout", loggedUser).then((res) => {
-          console.log(res.data);
-        });
-      }
-    });
-
-    return () => {
-      unSubscribe();
-    };
-  }, [user?.email]);
-
   const createUser = (email: string, password: string) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
@@ -67,6 +42,29 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     setPhoto("");
     return signOut(auth);
   };
+
+  useEffect(() => {
+    const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const userEmail = currentUser?.email || user?.email;
+      const loggedUser = { email: userEmail };
+      setUser(currentUser);
+      setLoading(false);
+      // if user exists then issue a token
+      if (currentUser) {
+        axiosSecure.post("/jwt", loggedUser).then((res) => {
+          console.log(res.data);
+        });
+      } else {
+        axiosSecure.post("/logout", loggedUser).then((res) => {
+          console.log(res.data);
+        });
+      }
+    });
+
+    return () => {
+      unSubscribe();
+    };
+  }, []);
 
   const authInfo = {
     user,

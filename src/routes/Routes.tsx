@@ -14,6 +14,8 @@ import { axiosSecure } from "../hooks/useAxiosSecure";
 import UpdateService from "../pages/UpdateService";
 import NotFound from "../pages/NotFound";
 import SearchResult from "../pages/SearchResult";
+import Cart from "../pages/Cart";
+import PaymentElement from "../payment/PaymentElement";
 
 const router: Router = createBrowserRouter([
   {
@@ -88,6 +90,14 @@ const router: Router = createBrowserRouter([
           const res = await axiosSecure(`/services/${params.id}`);
           return res.data;
         },
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/payment",
+        element: <PaymentElement />,
       },
     ],
   },

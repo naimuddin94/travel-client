@@ -10,20 +10,27 @@ import SocialLoginBtn from "../components/utility/SocialLoginBtn";
 import { FirebaseError } from "firebase/app";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
-import animationData from "../assets/animation/login.json"
-
+import animationData from "../assets/animation/login.json";
+import imageUpload from "../api/imageUpload";
 const Signup = () => {
   const [error, setError] = useState<string | null>(null);
   const { createUser, loading, setLoading, setName, setPhoto } = useAuthInfo();
   const navigate = useNavigate();
 
-  const handleRegister = (event: FormEvent<HTMLFormElement>) => {
+  const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = form.username.value;
     const email = form.email.value;
     const password = form.password.value;
-    const photo = form.photo.value;
+    // const photo = form.photo.value;
+    const photo = form.photo.files[0];
+    const size = photo.size;
+    if (size > 300000) {
+      return setError("Image size must be smaller than 500kb");
+    }
+
+    const imageURL = await imageUpload(photo);
 
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const hasUppercase = /[A-Z]/.test(password);
@@ -47,18 +54,20 @@ const Signup = () => {
 
     createUser(email, password)
       .then((result: UserCredential) => {
-        form.reset();
-        navigate("/");
         setError(null);
         toast.success("Account created successfully");
         // update profile
         setName(name);
-        setPhoto(photo);
+        setPhoto(imageURL);
         updateProfile(result.user, {
           displayName: name,
-          photoURL: photo,
+          photoURL: imageURL,
         })
-          .then(() => console.log("User name update successfully"))
+          .then(() => {
+            console.log("User name update successfully");
+            form.reset();
+            navigate("/");
+          })
           .catch((err) => toast.error("During update profile", err.message));
       })
       .catch((err: FirebaseError) => {
@@ -100,13 +109,15 @@ const Signup = () => {
               <Input type="text" name="username" placeholder="Enter your name">
                 Full Name
               </Input>
-              <Input
-                type="text"
-                name="photo"
-                placeholder="Enter your photo url"
-              >
-                Photo URL
-              </Input>
+              <label>
+                Photo
+                <input
+                  type="file"
+                  accept="image"
+                  name="photo"
+                  className="file-input file-input-bordered file-input-secondary bg-pink-50 w-full"
+                />
+              </label>
               <Input type="email" name="email" placeholder="Enter your email">
                 Email
               </Input>

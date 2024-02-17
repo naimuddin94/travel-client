@@ -5,6 +5,7 @@ import useAuthInfo from "../../hooks/useAuthInfo";
 
 const Navbar = () => {
   const { name, photo } = useAuthInfo();
+  console.log(name, photo);
   const urlRegex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i.test(photo);
   const [scrolling, setScrolling] = useState(false);
 
